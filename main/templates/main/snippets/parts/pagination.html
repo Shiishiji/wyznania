@@ -1,0 +1,42 @@
+
+<div style="margin: 20px auto 0 auto; width: 50%; display: flex; justify-content: center; align-items: center;">
+{% if wyznania.has_previous %}
+    <a style="
+        width: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px !important;
+        background-color: #9999cc !important;
+        margin: 10px;" href="?page=1"> << PIERWSZA</a>
+    <a style="
+        width: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px !important;
+        background-color: #9999cc !important;
+        margin: 10px;" href="?page={{ wyznania.previous_page_number }}"> POPRZEDNIA </a>
+{% endif %}
+<span class="current">
+    Strona {{ wyznania.number }} z {{ wyznania.paginator.num_pages }}.
+</span>
+{% if wyznania.has_next %}
+    <a style="
+        width: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px !important;
+        background-color: #9999cc !important;
+        margin: 10px;" href="?page={{ wyznania.next_page_number }}"> NASTĘPNA </a>
+    <a style= "
+        width: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px !important;
+        background-color: #9999cc !important;
+        margin: 10px;" href="?page={{ wyznania.paginator.num_pages }}"> OSTATNIA >> </a>
+{% endif %}
+</div>

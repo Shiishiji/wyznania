@@ -1,0 +1,57 @@
+{% extends 'main/header.html' %}
+
+{% block css %}
+    {% load staticfiles %}
+    <link href="{% static 'main/css/profilowa.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div id="mid">
+	<table id="profil">
+		<tr>
+            <td>
+			    <b>Użytkownik {{ user.username }}</b>
+		    </td>
+        </tr><br>
+		<tr><td>
+			{% if request.user.is_staff %}
+                {% if banned %}
+                    <span id="odbanuj" style="cursor: pointer"> <b onclick="user_ban('Odbanować')">ODBANUJ</b> </span>
+                {% else %}
+                    <span id="zbanuj" style="cursor: pointer"> <b onclick="user_ban('Zbanować')">ZBANUJ</b> </span>
+                {% endif %}
+            {% endif %}
+		</td></tr>
+		<tr><td>
+			<b>Dołączył:</b> {{ user.date_joined }}
+		</td></tr>
+		<tr><td>
+			<b>Ostatnio widziany: </b> {{ user.last_login }}
+		</td></tr>
+		<tr><td>
+			<b>Stan konta: </b> {% if banned %} Zbanowany. {% else %} Nie zbanowany. {% endif %}
+		</td></tr>
+		<tr><td>
+			<b>Status: </b>{% if user.is_staff %} Członek administracji. {% else %} Zwykły użytkownik. {% endif %}
+		</td></tr>	
+		<tr><td><br><br><br></td></tr>
+		<tr><td>
+
+            {% if request.user.username == user.username %}
+            <a href="{% url 'user_change_password' %} ">Zmień hasło</a>
+            <a href="{% url 'user_favourites' user.username %}">Twoje ulubione</a>
+            <a href="{% url 'user_posts' user.username %}">Twoje wyznania</a>
+            {% else %}
+            <a href="{% url 'user_favourites' user.username %}">Ulubione użytkownika {{ user.username }}</a>
+            {% endif %}
+
+		</td></tr>
+	</table>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {% if request.user.is_staff %}
+        {% include 'main/snippets/user_ban.html' %}
+    {% endif %}
+{% endblock %}

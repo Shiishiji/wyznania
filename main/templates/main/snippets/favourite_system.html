@@ -1,0 +1,74 @@
+<script>
+    /*
+        FUNCTION HANDLING CSRF_token COOKIE
+        REQUIRED FOR AJAX TO WORK WITH DJANGO
+    */
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    // Updates favourites button and checks if user likes the post
+    function updateFavouriteText(data, element){
+        // data is a json object with two fields, faved and count
+        /*
+            data['faved'] is a boolean field, tells you if user already likes the post or not
+            data['count'] is an integer field, it's the amount of people who favourited the post
+            element is an HTML DOM object which text is going to be changed
+        */
+        if (data['faved']) {
+            // if user likes the post
+            {% load staticfiles %}
+            var code = element.attr('data-code')
+            $("#fav-img-"+code).attr('src', '{% static 'main/img/ulubione_faved.png' %}')
+            $("#fav-b-"+code).text(data['count'])
+
+        } else {
+            // and if not
+            {% load staticfiles %}
+            var code = element.attr('data-code')
+            $("#fav-img-"+code).attr('src', '{% static 'main/img/ulubione.png' %}')
+            $("#fav-b-"+code).text(data['count'])
+        }
+
+    }
+
+    /*
+        FAVOURITES HANDLING MAIN JQUERY FUNCTION
+    */
+    $(document).ready(function(){
+        /*
+            FAVOURITE BUTTON
+         */
+        $(".fav-button").click(function(e){
+            e.preventDefault()  // stops the anchor from refreshing the page
+            var csrftoken = getCookie('csrftoken')  // get and csrf_token cookie required for ajax
+            var this_ = $(this)  // selects the HTML DOM object that's been clicked on
+
+            $.ajaxSetup({
+                headers: { "X-CSRFToken": csrftoken }  // required for django to work
+            })
+
+            $.ajax({
+                url: this_.attr('href'),  // get the url from an anchor
+                type: 'post',
+                'success': function(data, status){
+                    updateFavouriteText(data, this_)  // updates the button
+                }
+            })
+
+            return false
+        })
+    })
+</script>

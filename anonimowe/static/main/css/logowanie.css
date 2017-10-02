@@ -1,0 +1,32 @@
+table#logowanie{
+	background-color: #9999cc;
+	position:absolute;
+	margin-top: 100px;
+	left: 25%;
+	width: 50%;
+	table-layout: auto;
+	border: 0px;
+	padding-left: 5px;
+}
+input, input{
+	border: 0;
+    margin: 0 0 10px 0;
+	shadow: 0;
+	width: 200px;
+}
+h3#ID, h3#haslo {
+    margin: 0;
+}
+input#submit{
+	float: left;
+	font-color: #9999cc;
+    font-size: inherit;
+	background-color: #666699;
+	font-family: ufontscom_century-gothic;
+	border: 0;
+	shadow: 0;
+	margin-left: 40%;
+    height: 50px;
+    padding: 15px;
+    width: auto;
+}

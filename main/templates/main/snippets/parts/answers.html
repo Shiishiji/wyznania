@@ -1,0 +1,14 @@
+<li><a href="{% url 'user_profile' answer.autor.username %}">{{ answer.autor.username }}</a></li>
+    <ul>
+        <li>{{ answer.tresc }}</li>
+        <li>{{ answer.data_dodania }}</li>
+        <li>
+            {% load staticfiles %}
+            <a class="comment-like-button" data-code="{{ answer.code }}"
+            href="{% url 'api_likes' 'a' answer.code '1' %}"><img style="width:20px;" src="{% static 'main/img/plus.png' %}"/></a>
+            <span class="comment-{{ answer.code }}">{{ answer.counter }}</span>
+            <a class="comment-dislike-button" data-code="{{ answer.code }}"
+               href="{% url 'api_likes' 'a' answer.code '0' %}"><img style="width:20px;" src="{% static 'main/img/minus.png' %}"/></a>
+        </li>
+    </ul>
+

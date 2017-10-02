@@ -1,0 +1,120 @@
+h3.wyznanie{
+	margin: 0px;
+	padding: 0px;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-align: justify;
+}
+h5.kod{
+	padding: 10px;
+	margin: 0px;
+	height: 30px;
+}
+h5.ocena{
+	margin: 0px;
+	padding:0;
+}
+h3#skomentuj{
+	margin: 0 0 0 10px;
+	padding: 0px;
+}
+img#button_dodaj_ulubione{
+	height:30px;
+	width: 30px;
+	float: right;
+	margin-right: 30px;
+	padding-right: 30px;
+}
+img.plus{
+	height:30px;
+	width: 30px;
+}
+img.minus{
+	height:30px;
+	width: 30px;
+}
+.plus, .minus, .ocena {
+    display: inline-block;
+    vertical-align: middle;
+}
+textarea#dodaj_komentarz {
+	resize: none;
+	width: 70%;	
+	margin-left: 10px;
+}
+input#button_dodaj_komentarz {
+	float: right;
+	font-color: 9999cc;
+	background-color: #666699;
+	font-family: inherit;
+	border: 0;
+	shadow: 0;
+	height: 50px;
+	width: 80px;
+	margin-top: 2px;
+}
+table.wyznanie {
+    margin: 30px auto 0 auto;
+	background-color: #9999cc;
+	max-width: 50%;
+	table-layout: auto;
+	border: 0px;
+    padding: 5px;
+}
+table.wyznanie a {
+    text-decoration: none;
+    color: inherit;
+}
+tr {
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+.tekst-wyznania td {
+    padding: 3px;
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.pole_komentarza{
+	background-color: #ccccff;
+	width: 400px;
+	border-radius: 15px;
+	margin-left: 8%;
+	padding: 5px;
+}
+.tresc {
+    text-align: justify;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: pre-wrap;
+}
+.oceny_komentarza {
+    margin-left: 30%;
+}
+.textarea {
+    max-height: 60px;
+   width: 60%;
+}
+.submit {
+    float: left;
+	font-color: #9999cc;
+    font-size: inherit;
+	background-color: #666699;
+	font-family: ufontscom_century-gothic;
+	border: 0;
+	shadow: 0;
+    height: 55px;
+    padding: 15px;
+
+}
+#id_tresc{
+    width: 400px;
+    resize: none;
+}
+.answer-form textarea {
+    height: 50px;
+    width: 180px !important;
+
+}

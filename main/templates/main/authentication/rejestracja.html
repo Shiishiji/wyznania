@@ -1,0 +1,61 @@
+{% extends "main/header.html" %}
+
+{% block css %}
+    {% load staticfiles %}
+    <link rel="Stylesheet" type="text/css" href="{% static 'main/css/rejestracja.css' %}" />
+{% endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+
+<table id="rejestracja">
+        {% for e in errors %}
+            <tr>
+                <th style="color: red;">{{ e }}</th>
+            </tr>
+        {% endfor %}
+		<tr id="rejestracja"><td>
+		 	<h1 id="Registration"> Rejestracja </h1>
+		</td></tr>
+		<tr id="Informacje"><td>
+			<h2 id="informations"> informacje </h2>
+		</td></tr>
+		<tr id="ID"><td>
+			<label for="id_username"><h3 id="ID">nazwa użytkownika</h3></label>
+            {{ form.username }}
+		</td></tr>
+		<tr id="haslo"> <td>
+			<label for="id_password1"><h3 id="haslo">hasło</h3></label>
+			{{ form.password1 }}
+			<label for="id_password2"><h3 id="haslo2">powtórz hasło</h3></label>
+			{{ form.password2 }}
+		</td></tr>
+		<tr id="zasady"><td>
+			<h2 class="terms">zasady użytkowania</h2>
+		</td></tr>
+		<tr><td>
+			<input class="terms" id="terms" type="checkbox" />
+			<h3 class="terms">Nie jestem botem.</h3>
+		</td></tr>	
+		<tr id="guziczki_rejestracja">
+		<td>
+			<input id="submit" type="submit" style="display: none" value="Załóż konto!" />
+		</td>
+		</tr>
+    {{ form.errors }}
+	</table>
+    <table>
+
+        </table>
+</form>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+    $(document).ready(function(){
+        $('#terms').click(function(){
+            $('#submit').toggle()
+        })
+    })
+    </script>
+{% endblock %}

@@ -1,0 +1,40 @@
+<li>
+    <span>
+        <a href="{% url 'detail' wyznanie.code %}"> Tytuł >> {{ wyznanie.title }}</a>
+    </span>
+    <span>
+        {% if user in wyznanie.favourites.all %}
+        <a class="fav-button" href='{% url 'api_toggle_favourite' wyznanie.code %}'>
+            Usuń z ulubionych: {{ wyznanie.favourites.count }}
+        </a>
+        {% else %}
+        <a class="fav-button" href='{% url 'api_toggle_favourite' wyznanie.code %}'>
+            Ulubione: {{ wyznanie.favourites.count }}
+        </a>
+        {% endif %}
+    </span>
+</li>
+{% if request.user.is_staff %}
+<li>
+    <span>
+        <a href="">AKCEPTUJ</a>
+    </span>
+    <span>
+        <a href="">ODRZUĆ</a>
+    </span>
+</li>
+{% endif %}
+    <ul>
+        <li>Treść >> {{ wyznanie.tresc }}</li>
+        <li>Data dodania >> {{ wyznanie.data }}</li>
+        <li>Autor >> {{ wyznanie.autor }}</li>
+
+        <li>
+            {% load staticfiles %}
+            <a class="post-like-button" data-code="{{ wyznanie.code }}"
+               href="{% url 'api_likes' 'w' wyznanie.code '1' %}"><img style="width:20px;" src="{% static 'main/img/plus.png' %}"/></a>
+            <span class="post-counter-{{ wyznanie.code }}">{{ wyznanie.counter }}</span>
+            <a class="post-dislike-button" data-code="{{ wyznanie.code }}"
+               href="{% url 'api_likes' 'w' wyznanie.code '0' %}"><img style="width:20px;" src="{% static 'main/img/minus.png' %}"/></a>
+        </li>
+    </ul>

@@ -1,0 +1,61 @@
+{% extends "main/header.html" %}
+
+{% block css %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}"
+{% endblock %}
+
+{% block content %}
+    <div style="height: 60px;"></div>
+<div id="mid">
+    <table class="wyznanie">
+    <div>
+    <!-- POST -->
+{% include 'main/snippets/parts/wyznanie.html' %}
+
+
+    <!-- ADD COMMENT FORM -->
+    <tr>
+        <td>
+            <form method="post">{% csrf_token %}
+                <p>
+                    <b>Dodaj komentarz: </b>
+                </p>
+                {{ form.as_p }}
+                <button class="submit" type="submit">Skomentuj</button>
+            </form>
+        </td>
+    </tr>
+    <!-- COMMENTS -->
+    <tr>
+        <td>
+            <p>
+                <b>Komentarze: {{ wyznanie.komentarz_set.count }}</b>
+            </p>
+        </td>
+{% for comment in comments %}
+    {% include 'main/snippets/parts/komentarz.html' %}
+    <tr style="padding-left: 40px;">
+        <!--<td>-->
+    {% for answer in comment.answer_set.all %}
+        {% include 'main/snippets/parts/replies.html' %}
+    {% endfor %}
+        <!--</td>-->
+    </tr>
+{% endfor %}
+
+    </tr>
+    </div>
+    </table>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {% include 'main/snippets/posts_like_system.html' %}
+    {% include 'main/snippets/favourite_system.html' %}
+    {% include 'main/snippets/comments_like_system.html' %}
+    {% include 'main/snippets/answer_box_system.html' %}
+        {% if request.user.is_staff %}
+            {% include 'main/snippets/posts_acceptance_system.html' %}
+        {% endif %}
+{% endblock %}

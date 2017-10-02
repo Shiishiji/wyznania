@@ -1,0 +1,20 @@
+table#profil{
+	background-color: #9999cc;
+	font-size: 18px;
+	position:absolute;
+	margin-top: 100px;
+	left: 25%;
+	width: 50%;
+	table-layout: auto;
+	border: 0px;
+	padding-left: 5px;
+}
+#zbanuj{
+	color: red;
+}
+#odbanuj{
+	color: green;
+}
+#zdjprof{
+	width: 40px;
+}

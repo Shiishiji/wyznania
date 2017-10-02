@@ -1,0 +1,27 @@
+{% extends "main/header.html" %}
+
+{% block css %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}"
+{% endblock %}
+
+{% block content %}
+    <div id="mid">
+    <table class="wyznanie">
+    <caption><h3>
+        {{ text }} użytkownika {{ username }}
+    </h3></caption>
+
+    {% for wyznanie in objects %}
+        <table class="wyznanie">
+        {% include 'main/snippets/parts/wyznanie.html' %}
+        </table>
+    {% endfor %}
+    </table>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {% include 'main/snippets/favourite_system.html' %}
+    {% include 'main/snippets/posts_like_system.html' %}
+{% endblock %}

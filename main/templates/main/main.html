@@ -1,0 +1,56 @@
+{% extends "main/header.html" %}
+
+{% block css %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}"
+
+{% endblock %}
+
+{% block content %}
+
+<div id="mid">
+<div style="margin: 60px auto 0 auto;">
+    {% include 'main/snippets/parts/pagination.html' %}
+</div>
+{% for wyznanie in wyznania %}
+    <div>
+	<table class="wyznanie">
+        {% include 'main/snippets/parts/wyznanie.html' %}
+
+		<tr id="wyswietlane_komentarze"><td colspan="2">
+			<h3>Komentarze {{ wyznanie.komentarz_set.count }}</h3>
+            <!-- ADD COMMENT FORM -->
+            <tr>
+                <td>Dodaj komentarz</td>
+            </tr>
+            <tr><form method="post" action="{% url 'detail' wyznanie.code %}">{% csrf_token %}
+                <td style="display: flex; justify-content: center;">
+                    <textarea name="tresc" id="id_tresc""></textarea>
+                    <button class="submit" type="submit">Skomentuj</button>
+                </td>
+                </form>
+            </tr>
+            {% for comment in wyznanie.get3 %}
+                {% include 'main/snippets/parts/komentarz.html' %}
+                {% for answer in comment.get2 %}
+                {% endfor %}
+            {% endfor %}
+		</td></tr>
+	</table>
+    </div>
+{% endfor %}
+{% include 'main/snippets/parts/pagination.html' %}
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {% if request.user.is_authenticated %}
+        {% include 'main/snippets/favourite_system.html' %}
+        {% include 'main/snippets/posts_like_system.html' %}
+        {% include 'main/snippets/comments_like_system.html' %}
+        {% include 'main/snippets/answer_box_system.html' %}
+        {% if request.user.is_staff %}
+            {% include 'main/snippets/posts_acceptance_system.html' %}
+        {% endif %}
+    {% endif %}
+{% endblock %}

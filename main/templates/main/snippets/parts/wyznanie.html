@@ -1,0 +1,73 @@
+
+{% if request.user.is_staff %}
+<tr style="margin:0;">
+    <td colspan="2">
+        <b style="color:green;" data-code="{{ wyznanie.code }}" onclick="posts_acceptance_system(this, 3)">GŁÓWNA</b>
+        <b style="color:dodgerblue;" data-code="{{ wyznanie.code }}" onclick="posts_acceptance_system(this, 2)">POCZEKALNIA</b>
+        <b style="color:darkslategray;" data-code="{{ wyznanie.code }}" onclick="posts_acceptance_system(this, 1)">NIEZWERYFIKOWANE</b>
+        <b style="color:red;" data-code="{{ wyznanie.code }}" onclick="posts_acceptance_system(this, 0)">KOSZ</b>
+    </td>
+</tr>
+{% endif %}
+<tr class="top_wyznanie">
+    <td style="width: 40%; float: right; text-align: end">
+         {{ wyznanie.data|date:"D d M Y"  }}
+    </td>
+</tr>
+<tr>
+    <td>
+		<div>
+			<h4 class="kod">#{{ wyznanie.code }}</h4>
+		</div>
+	</td>
+</tr>
+<tr>
+    <td>
+        <a href="{% url 'detail' wyznanie.code %}"> <h3 style="margin: 0 auto 0 auto;">{{ wyznanie.title }}</h3></a>
+    </td>
+    <td style="display: block; text-decoration: none !important; color: inherit !important;">
+        {% if user in wyznanie.favourites.all %}
+        <a class="fav-button" data-code="{{ wyznanie.code }}" href='{% url 'api_toggle_favourite' wyznanie.code %}'>
+            <div style="width: 50%">
+                {% load staticfiles %}
+                <img id="fav-img-{{ wyznanie.code }}" style="width: 30px; height: 30px;" src="{% static 'main/img/ulubione_faved.png' %}">
+                <b id="fav-b-{{ wyznanie.code }}">{{ wyznanie.favourites.count }}</b>
+            </div>
+        </a>
+        {% else %}
+        <a class="fav-button" data-code="{{ wyznanie.code }}" href='{% url 'api_toggle_favourite' wyznanie.code %}'>
+            <div>
+                <img id="fav-img-{{ wyznanie.code }}" style="width: 30px; height: 30px;" src="{% static 'main/img/ulubione.png' %}">
+                <b id="fav-b-{{ wyznanie.code }}">{{ wyznanie.favourites.count }}</b>
+            </div>
+        </a>
+        {% endif %}
+    </td>
+</tr>
+
+    <tr class="tekst-wyznania">
+        <td colspan="2">
+            <div class="tresc">
+                <p>{{ wyznanie.tresc }}</p>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="oceny">
+            {% load staticfiles %}
+            <span>
+                <a class="post-like-button" data-code="{{ wyznanie.code }}"
+                    href="{% url 'api_likes' 'w' wyznanie.code '1' %}">
+                    <img class="plus" src="{% static 'main/img/plus.png' %}"/></a>
+            </span>
+            <span class="post-counter-{{ wyznanie.code }}">
+                <h5 class="ocena">{{ wyznanie.counter }}</h5>
+            </span>
+            <span>
+                <a class="post-dislike-button" data-code="{{ wyznanie.code }}"
+                   href="{% url 'api_likes' 'w' wyznanie.code '0' %}">
+                    <img class="minus" src="{% static 'main/img/minus.png' %}"/>
+                </a>
+            </span>
+        </td>
+    </tr>

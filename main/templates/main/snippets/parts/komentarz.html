@@ -1,0 +1,27 @@
+<tr class="comment">
+ 
+
+	<tr><td>
+		<div class="pole_komentarza">	
+	   		<div class="top_komentarza">
+	   				<a href="">{{ comment.autor.username }}</a>
+	       		 	<b style="float:right">{{ comment.data_dodania|date:"D d M Y"  }}</b>
+	  		</div>
+			<div style="padding: 15px;" class="tresc">{{ comment.tresc }}</div>
+			<div class="oceny_komentarza">
+	    		<!--{% load staticfiles %} -->
+	            <a class="comment-like-button" data-code="{{ comment.code }}"
+	                   	href="{% url 'api_likes' 'c' comment.code '1' %}">
+                    <img style="width:20px;" src="{% static 'main/img/plus.png' %}"/></a>
+	            <span class="comment-{{ comment.code }}">{{ comment.counter }}</span>
+	            <a class="comment-dislike-button" data-code="{{ comment.code }}"
+	                    href="{% url 'api_likes' 'c' comment.code '0' %}">
+                    <img style="width:20px;" src="{% static 'main/img/minus.png' %}"/></a>
+	            <a class="comment-answer-button" data-code="{{ comment.code }}"
+	                   href="{% url 'api_answer_form' comment.code %}">
+                    <img style="width:20px;" src="{% static 'main/img/001-arrows.png' %}"></a>
+	            <div class="comment-answer-box-{{ comment.code }}">
+	            	<form method="post" class="answer-form" action="{% url 'api_answer_form' comment.code %}">{% csrf_token %}</form>
+	            </div>
+	         </div>
+         </div>

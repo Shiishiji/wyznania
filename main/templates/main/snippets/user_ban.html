@@ -1,0 +1,7 @@
+<script>
+        function user_ban(option){
+            if (confirm(option +" {{ user.username }}?")){
+                window.location.href = "{% url 'user_profile_ban_toggle' user.username %}"
+            }
+        }
+</script>

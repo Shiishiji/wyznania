@@ -1,0 +1,19 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+
+    <h3>Rejestracja użytkownika</h3>
+    <label for="id_username">Nazwa użytkownika</label>
+    {{ form.username }}
+    <br/>
+    <label for="id_password1">Hasło</label>
+    {{ form.password1 }}
+    <br/>
+    <label for="id_password2">Potwierdź hasło</label>
+    {{ form.password2 }}
+    <br/>
+    <button type="submit">Załóż konto</button>
+
+</form>
+{% endblock %}

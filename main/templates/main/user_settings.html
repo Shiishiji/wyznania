@@ -1,0 +1,18 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+
+    <h3>Twój profil</h3>
+    <p><b>Nazwa użytkownika: </b>{{ user.username }}</p>
+    <p><b>Data dołączenia: </b>{{ user.date_joined }}</p>
+    <p><b>Ostatnio zalogowany: </b>{{ user.last_login }}</p>
+    <p><b>Stan konta:</b> {% if user.is_banned %} Zbanowany. {% else %} Nie zbanowany. {% endif %} </p>
+    <p><b>Status:</b> {% if user.is_staff %} Członek administracji. {% else %} Zwykły użytkownik. {% endif %} </p>
+
+    <b>Opcje: </b>
+    <li><a href="{% url 'user_change_password' %} ">Zmień hasło</a></li>
+
+    <li><a href="{% url 'user_favourites' user.username %}">Twoje ulubione</a></li>
+    <li><a href="{% url 'user_posts' user.username %}">Twoje wyznania</a></li>
+
+{% endblock %}

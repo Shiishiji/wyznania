@@ -1,0 +1,45 @@
+{% extends "main/header.html" %}
+
+{% block css %}
+<style>
+.container {
+    margin: 100px auto 0 auto;
+    width: 50%;
+    background-color: #9999cc;
+    padding: 30px;
+    border-radius: 10%;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+}
+.submit {
+	float: left;
+	font-color: #9999cc;
+    font-size: inherit;
+	background-color: #666699;
+	font-family: ufontscom_century-gothic;
+	border: 0;
+	shadow: 0;
+	margin-left: 40%;
+    height: 50px;
+    padding: 15px;
+    width: auto;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+<div class="container">
+
+    <h3>Dodawanie wyznania</h3>
+    <div class="form">
+    {{ form }}
+    <button class="submit" type="submit">Dodaj wyznanie</button>
+    </div>
+
+
+</div>
+</form>
+{% endblock %}

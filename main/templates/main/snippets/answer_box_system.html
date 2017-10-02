@@ -1,0 +1,25 @@
+<script>
+    function getAnswerForm(data, code){
+        var box = $('.comment-answer-box-' + code)
+        var buff = box.children().html('')
+        box.children().html( data + "<button class=\'answer-submit submit\' type=\'submit\'>Dodaj!</button>"
+        )
+
+    }
+
+    $('.comment-answer-button').click(function(e){
+        e.preventDefault()
+        var this_ = $(this)  // selects the HTML DOM object that's been clicked on
+
+        $.ajax({
+            url: this_.attr('href'),  // get the url from an anchor
+            type: 'get',
+            'success': function(data, status){
+                console.log(this_.attr('code'))
+                getAnswerForm(data, this_.attr('data-code'))  // updates the button
+            }
+        })
+        return false
+    })
+
+</script>

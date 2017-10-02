@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Anonimowe Wyznania</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    {% load staticfiles %}
+    <style type="text/css">
+        @font-face {
+        font-family: 'ufontscom_century-gothic';
+        src:local('ufontscom_century-gothic'),
+            url({% static 'main/fonts/ufonts.com_century-gothic.ttf' %}) format('truetype');
+        }
+    </style>
+
+    <link rel="Stylesheet" type="text/css" href="{% static 'main/css/szablon.css' %}" />
+    {% block css %}
+    {% endblock %}
+
+</head>
+<body>
+<header id="top">
+	<a href="{% url 'home' %}"><b style="font-size: 30px" id="title">anonimowe wyznania</b></a>
+<span>
+	<a href="{% url 'home' %}"><h3>GŁÓWNA</h3></a>
+    <a href="{% url 'queue' %}"><h3>POCZEKALNIA</h3></a>
+    <a href="{% url 'bests' %}"><h3>HITY</h3></a>
+    {% if request.user.is_staff %}
+        <a href="{% url 'staff_queue' %}"><h3>NIEZWERYFIKOWANE</h3></a>
+        <a href="{% url 'staff_thrash' %}"><h3>KOSZ</h3></a>
+    {% endif %}
+</span>
+<span></span>
+
+	{% if not request.user.is_authenticated %}
+<span>
+	<a href="{% url 'login' %}"><h3 id="n1">Zaloguj</h3></a>
+    <a href="{% url 'register' %}"><h3 id="n2">Zarejestruj się</h3></a>
+</span>
+	{% endif %}
+	<!--
+	<input id="wyszukiwarka" type="text" name="search" size="55"/>
+	
+	<a href=""><img id="button_wyszukiwarka" src="tool.svg"></a>
+	-->
+
+	{% if request.user.is_authenticated %}
+<span>
+	<a href="{% url 'wyznanie_create' %}">
+        <img id="button_dodaj" alt="Dodaj wyznanie!"  src="{% static 'main/img/dodaj.svg' %}">
+    </a>
+	<a href="{% url 'user_settings' %}">
+        <img id="button_ustawienia" alt="Ustawienia"  src="{% static 'main/img/ustawienia.png' %}">
+    </a>
+	<a href="{% url 'user_favourites' request.user.username %}">
+        <img id="button_ulubione" alt="Ulubione" src="{% static 'main/img/ulubione.png' %}">
+    </a>
+    <a href="{% url 'logout' %}">
+        <img id="button_wyloguj" alt="Wyloguj"  src="{% static 'main/img/wyloguj.png' %}">
+    </a>
+</span>
+	<!--<a href=""><h3 id="zalogowany_jako">Zalogowany jako {# request.user.username #}</h3></a>-->
+	{% endif %}
+</header>
+
+<main style="margin: 40px 0 0 0;">
+{% block content %}
+{% endblock %}
+</main>
+<!--
+<script		  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
+-->
+{% load staticfiles %}
+<script src="{% static 'main/js/jquery-3.2.1.min.js' %}"></script>
+
+{% block javascript %}
+{% endblock %}
+</body>
+</html>

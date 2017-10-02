@@ -1,0 +1,28 @@
+{% extends "main/header.html" %}
+
+{% block css %}
+    {% load staticfiles %}
+    <link rel="Stylesheet" type="text/css" href="{% static 'main/css/logowanie.css' %}" />
+{% endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <table id="logowanie">
+		<tr id="logowanie"><td>
+		 	<h1 id="login"> Logowanie </h1>
+		</td></tr>
+		<tr id="ID"><td>
+			<label for="id_username"><h3 id="ID">nazwa użytkownika</h3></label>
+			{{ form.username }}
+		</td></tr>
+		<tr id="haslo"> <td>
+			<label for="id_password"><h3 id="haslo">hasło</h3></label>
+			{{ form.password }}
+		</td></tr>
+		<tr id="guziczki_logowanie">
+		<td>
+			<input id="submit" type="submit" value="Zaloguj" />
+		</td></tr>
+	</table>
+</form>
+{% endblock %}

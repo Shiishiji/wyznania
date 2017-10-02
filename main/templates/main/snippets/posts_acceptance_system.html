@@ -1,0 +1,27 @@
+{% if request.user.is_staff %}
+    <script>
+        function posts_acceptance_system(element, option) {
+            console.log("posts_acceptance_system - start")
+            var code = $(element).attr('data-code')
+            console.log(code)
+            if(option == 2){
+                // POCZEKALNIA
+                if (confirm("Przenieść do poczekalni " + code +"?")) {
+                    window.location.href = '{% url 'home' %}w/'+code+'/remove'
+            }} else if(option == 3){
+                // GŁÓWNA
+                if (confirm("Przenieść na główną " + code +"?")) {
+                    window.location.href = '{% url 'home' %}w/'+code+'/accept'
+            }} else if (option == 1) {
+                // NIEZWERYFIKOWANE
+                if (confirm("Przenieść do niezweryfikowanych "+ code + "?")) {
+                    window.location.href = '{% url 'home' %}w/'+code+'/move'
+            }} else {
+                //KOSZ
+                if (confirm("Przenieść do kosza "+ code + "?")) {
+                    window.location.href = '{% url 'home' %}w/'+code+'/reject'
+            }}
+            return false
+        }
+    </script>
+{% endif %}

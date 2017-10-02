@@ -1,0 +1,19 @@
+<li><a href="{% url 'user_profile' comment.autor.username %}">{{ comment.autor.username }}</a></li>
+    <ul>
+        <li>{{ comment.tresc }}</li>
+        <li>{{ comment.data_dodania }}</li>
+        <li>
+            {% load staticfiles %}
+            <a class="comment-like-button" data-code="{{ comment.code }}"
+                href="{% url 'api_likes' 'c' comment.code '1' %}"><img style="width:20px;" src="{% static 'main/img/plus.png' %}"/></a>
+            <span class="comment-{{ comment.code }}">{{ comment.counter }}</span>
+            <a class="comment-dislike-button" data-code="{{ comment.code }}"
+                href="{% url 'api_likes' 'c' comment.code '0' %}"><img style="width:20px;" src="{% static 'main/img/minus.png' %}"/></a>
+            <a class="comment-answer-button" data-code="{{ comment.code }}"
+                href="{% url 'api_answer_form' comment.code %}">REPLY</a>
+            <div class="comment-answer-box-{{ comment.code }}">
+                <form method="post" action="{% url 'api_answer_form' comment.code %}">{% csrf_token %}</form>
+            </div>
+        </li>
+    </ul>
+

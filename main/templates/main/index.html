@@ -1,0 +1,26 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+<div>
+{% for wyznanie in wyznania %}
+    {% include 'main/snippets/parts/posts.html' %}
+    <ul>
+    {% for comment in wyznanie.get3 %}
+        {% include 'main/snippets/parts/comments.html' %}
+        <ul>
+        {% for answer in comment.get2 %}
+            {% include 'main/snippets/parts/answers.html' %}
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    </ul>
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {% include 'main/snippets/favourite_system.html' %}
+    {% include 'main/snippets/posts_like_system.html' %}
+    {% include 'main/snippets/comments_like_system.html' %}
+    {% include 'main/snippets/answer_box_system.html' %}
+{% endblock %}

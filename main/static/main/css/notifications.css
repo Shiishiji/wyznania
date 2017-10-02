@@ -1,0 +1,20 @@
+body {
+	background-color: #666699;
+	color: #333366;
+	font-family: 'ufontscom_century-gothic';
+	margin: 0;
+	padding: 0;
+}
+
+#alert{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+    flex-direction: column;
+	background-color: #9999cc;
+	margin: 0px;
+	margin-top:20%;
+	width: 100%;
+	padding: 0;
+	height: 40px;
+}

@@ -1,0 +1,18 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+
+    <h3>Logowanie użytkownika</h3>
+    <div>
+        <label for="id_username">Nazwa użytkownika: </label>
+        {{ form.username }}
+    </div>
+    <div>
+        <label for="id_password">Hasło: </label>
+        {{ form.password }}
+    </div>
+    <button type="submit">Zaloguj</button>
+
+</form>
+{% endblock %}

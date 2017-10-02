@@ -1,0 +1,20 @@
+
+<tr><td>
+<div class= "pole_odp" style="background-color:#8F8FBD; border-radius:10px; margin-left: 18%; padding: 5px" >
+    <div class="top_odp">
+        <a style="margin: 0 auto 0 auto" href="{% url 'user_profile' answer.autor.username %}">{{ answer.autor.username }}</a>
+        <b style="margin: 0 auto 0 auto; float:right">{{ answer.data_dodania|date:"D d M Y" }}</b>
+    </div>
+    <div class="tresc">
+        <p style="margin: 0 auto 0 auto">{{ answer.tresc }}</p>
+    </div>
+    <div class="oceny_odp">
+        {% load staticfiles %}
+        <a class="comment-like-button" data-code="{{ answer.code }}"
+           href="{% url 'api_likes' 'a' answer.code '1' %}"><img style="width:20px;" src="{% static 'main/img/plus.png' %}"/></a>
+        <span class="comment-{{ answer.code }}">{{ answer.counter }}</span>
+        <a class="comment-dislike-button" data-code="{{ answer.code }}"
+           href="{% url 'api_likes' 'a' answer.code '0' %}"><img style="width:20px;" src="{% static 'main/img/minus.png' %}"/></a>
+    </div>
+</div>
+</td></tr>

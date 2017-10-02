@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Anonimowe Wyznania</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    {% load staticfiles %}
+    <style type="text/css">
+        @font-face {
+        font-family: 'ufontscom_century-gothic';
+        src:local('ufontscom_century-gothic'),
+            url({% static 'main/fonts/ufonts.com_century-gothic.ttf' %}) format('truetype');
+        }
+    </style>
+
+    <link rel="Stylesheet" type="text/css" href="{% static 'main/css/szablon.css' %}" />
+    {% block css %}
+    {% endblock %}
+
+</head>
+<body>
+<header id="top">
+	<a href="{% url 'home' %}"><b style="font-size: 30px" id="title">anonimowe wyznania</b></a>
+<span>
+	<a href="{% url 'home' %}"><h3>GŁÓWNA</h3></a>
+    <a href="{% url 'queue' %}"><h3>POCZEKALNIA</h3></a>
+    <a href="{% url 'bests' %}"><h3>HITY</h3></a>
+    {% if request.user.is_staff %}
+        <a href="{% url 'staff_queue' %}"><h3>NIEZWERYFIKOWANE</h3></a>
+        <a href="{% url 'staff_thrash' %}"><h3>KOSZ</h3></a>
+    {% endif %}
+</span>
+<span></span>
+
+	{% if not request.user.is_authenticated %}
+<span>
+	<a href="{% url 'login' %}"><h3 id="n1">Zaloguj</h3></a>
+    <a href="{% url 'register' %}"><h3 id="n2">Zarejestruj się</h3></a>
+</span>
+
+    {% else %}
+
+<span onmouseover="menu_toggle()">
+    <h3>{{ request.user.username }}</h3>
+</span>
+	{% endif %}
+</header>
+{% if request.user.is_authenticated %}
+<ul class="menu-toggle" style="display:none;">
+
+            <a href="{% url 'user_settings' %}">
+                USTAWIENIA
+                <img id="button_ustawienia" alt="Ustawienia"  src="{% static 'main/img/ustawienia.png' %}">
+            </a>
+
+
+            <a href="{% url 'user_favourites' request.user.username %}">
+                ULUBIONE
+                <img id="button_ulubione" alt="Ulubione" src="{% static 'main/img/ulubione.png' %}">
+            </a>
+
+            <a href="{% url 'logout' %}">
+                WYLOGUJ
+                <img id="button_wyloguj" alt="Wyloguj"  src="{% static 'main/img/wyloguj.png' %}">
+            </a>
+
+
+</ul>
+{% endif %}
+<main style="float: left; width: 80%;">
+{% block content %}
+{% endblock %}
+</main>
+<!--<div style="margin-top: 80px; float: left;">-->
+<div style="display: flex; position: absolute; top: 130px; right: 10%; flex-direction: column; align-items: center;">
+    {% if request.user.is_authenticated %}
+    <a
+        style=" display: block; background-color: #9999cc;  padding: 15px; border-radius: 10%;
+                text-align: center; margin-bottom: 10px; color: inherit; text-decoration: none;"
+        href="{% url 'wyznanie_create' %}">
+        DODAJ WYZNANIE
+    </a> <br>
+    {% endif %}
+    {% load staticfiles %}
+    <a href="https://shiishiji.github.io/"><img src="{% static 'main/img/baner.png' %}" alt="baner"></a>
+</div>
+<!--
+<script		  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
+-->
+{% load staticfiles %}
+<script src="{% static 'main/js/jquery-3.2.1.min.js' %}"></script>
+
+{% block javascript %}
+{% endblock %}
+
+<script>
+    function menu_toggle(){
+        $('.menu-toggle').show()
+        return false
+    }
+    $(document).ready(function(){
+      $('main').hover(function(){
+          $('.menu-toggle').hide()
+      })
+    })
+</script>
+
+</body>
+</html>

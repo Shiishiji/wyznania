@@ -1,0 +1,33 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+    <span><h3>Użytkownik {{ user.username }}</h3></span>
+    {% if request.user.is_staff %}
+        {% if banned %}
+            <span style="color:green; cursor: pointer"> <b onclick="user_ban('Odbanować')">ODBANUJ</b> </span>
+        {% else %}
+            <span style="color:red; cursor: pointer"> <b onclick="user_ban('Zbanować')">ZBANUJ</b> </span>
+        {% endif %}
+    {% endif %}
+    <p><b>Dołączył:</b> {{ user.date_joined }} </p>
+    <p><b>Ostatnio zalogowany:</b> {{ user.last_login }} </p>
+
+    <p><b>Stan konta:</b> {% if banned %} Zbanowany. {% else %} Nie zbanowany. {% endif %} </p>
+    <p><b>Status:</b> {% if user.is_staff %} Członek administracji. {% else %} Zwykły użytkownik. {% endif %} </p>
+
+    <p><a href="{% url 'user_favourites' user.username %}">Ulubione użytkownika {{ user.username }}</a></p>
+
+
+{% endblock %}
+
+{% block javascript %}
+    {% if request.user.is_staff %}
+    <script>
+        function user_ban(option){
+            if (confirm(option +" {{ user.username }}?")){
+                window.location.href = "{% url 'user_profile_ban_toggle' user.username %}"
+            }
+        }
+    </script>
+    {% endif %}
+{% endblock %}

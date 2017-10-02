@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+ 	<title>Anonimowe Wyznania</title>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="2; URL={% url 'home' %}">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/notifications.css' %}" />
+</head>
+<body>
+	<div id="alert">
+		<b style="display: block;">{{ text }}</b>
+	</div>
+</body>
+</html>
